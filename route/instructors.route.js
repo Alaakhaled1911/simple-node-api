@@ -9,17 +9,17 @@ router.post(
   "/",
   [
     // Validation rules
-    body("title")
-      .notEmpty()
-      .withMessage("Title is required")
-      .isLength({ min: 3 })
-      .withMessage("Title must be at least 3 characters long"),
-    body("instructor").notEmpty().withMessage("Instructor name is required"),
-    body("duration")
-      .notEmpty()
-      .withMessage("Duration is required")
-      .isLength({ min: 2 })
-      .withMessage("Duration must be at least 2 characters long"),
+    // body("title")
+    //   .notEmpty()
+    //   .withMessage("Title is required")
+    //   .isLength({ min: 3 })
+    //   .withMessage("Title must be at least 3 characters long"),
+    body("name").notEmpty().withMessage("Instructor name is required"),
+    // body("duration")
+    //   .notEmpty()
+    //   .withMessage("Duration is required")
+    //   .isLength({ min: 2 })
+    //   .withMessage("Duration must be at least 2 characters long"),
   ],
   instructorController.addInstructor
 );
