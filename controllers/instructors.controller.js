@@ -5,7 +5,7 @@ const httpStatus = require("../utils/httpStatusText");
 
 const { body, validationResult } = require("express-validator");
 const asyncWrapper = require("../middleware/asyncWrapper");
-const getAllInstructors = async (req, res) => {
+const getAllInstructors = asyncWrapper(async (req, res) => {
   const query = req.query;
   const limit = query.limit;
   const page = query.page;
@@ -15,7 +15,7 @@ const getAllInstructors = async (req, res) => {
     .limit(limit)
     .skip(skip);
   res.json({ status: httpStatus.SUCCESS, data: { instructors } });
-};
+});
 const getInstructor = asyncWrapper(async (req, res) => {
   // Find the instructor by ID asynchronously
   const instructor = await Instructor.findById(req.params.instructorId);

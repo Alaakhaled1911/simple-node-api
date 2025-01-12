@@ -17,7 +17,9 @@ mongoose
 app.use(express.json());
 
 const instructorRouter = require("./route/instructors.route");
+const userRouter = require("./route/userRouter.route");
 app.use("/api/instructors", instructorRouter);
+app.use("/api/users", userRouter);
 app.all("*", (req, res, next) => {
   res.status(404).json({
     status: httpStatus.ERROR,
@@ -25,13 +27,15 @@ app.all("*", (req, res, next) => {
     message: "This resource is not available",
   });
 });
+
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({
-    status: httpStatus.ERROR,
+    status: err.statusText || "error",
     data: null,
-    message: err.message,
+    message: err.message || "An unexpected error occurred",
   });
 });
+
 app.listen(process.env.port, () => {
   console.log("iam listening on port 5000");
 });
